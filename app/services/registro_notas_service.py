@@ -2,14 +2,10 @@ from app.exceptions.exceptions import NotaInvalidaError
 
 
 class RegistroNotasService:
-    """Servicio simple para registrar notas con validación básica."""
+    """Servicio para registrar notas académicas."""
 
     def registrar_nota(self, materia: str, semestre: str, nota: float) -> dict:
-        """Registra una nota validando que esté entre 0.0 y 5.0.
 
-        Devuelve un diccionario con los datos de la nota si es válida.
-        Lanza `NotaInvalidaError` si la nota está fuera de rango.
-        """
         try:
             valor = float(nota)
         except (TypeError, ValueError):
@@ -23,3 +19,6 @@ class RegistroNotasService:
             "semestre": semestre,
             "nota": valor,
         }
+
+    def aprobo_materia(self, nota: float) -> bool:
+        return nota >= 3.0
