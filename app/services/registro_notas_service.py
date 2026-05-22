@@ -1,4 +1,7 @@
-from app.exceptions.exceptions import NotaInvalidaError
+from app.exceptions.exceptions import (
+    NotaInvalidaError,
+    NotaDuplicadaError
+)
 
 
 class RegistroNotasService:
@@ -15,15 +18,20 @@ class RegistroNotasService:
             raise NotaInvalidaError("La nota debe ser un número")
 
         if valor < 0.0 or valor > 5.0:
-            raise NotaInvalidaError("La nota debe estar entre 0.0 y 5.0")
+            raise NotaInvalidaError(
+                "La nota debe estar entre 0.0 y 5.0"
+            )
 
         for registro in self.notas_registradas:
+
             if (
                 registro["materia"] == materia
                 and registro["semestre"] == semestre
             ):
-                raise Exception(
-                    "Ya existe una nota registrada para esta materia y semestre"
+
+                raise NotaDuplicadaError(
+                    "Ya existe una nota registrada para "
+                    "esta materia y semestre"
                 )
 
         nueva_nota = {

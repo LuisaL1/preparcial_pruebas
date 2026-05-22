@@ -1,9 +1,16 @@
 import pytest
 
-from app.services.registro_notas_service import RegistroNotasService
+from app.services.registro_notas_service import (
+    RegistroNotasService
+)
+
+from app.exceptions.exceptions import (
+    NotaDuplicadaError
+)
 
 
 def test_registrar_nota_valida():
+
     service = RegistroNotasService()
 
     resultado = service.registrar_nota(
@@ -16,18 +23,33 @@ def test_registrar_nota_valida():
 
 
 def test_no_permitir_notas_duplicadas_mismo_semestre():
+
     service = RegistroNotasService()
 
-    service.registrar_nota("Matemáticas", "2026-1", 4.0)
+    service.registrar_nota(
+        "Matemáticas",
+        "2026-1",
+        4.0
+    )
 
-    with pytest.raises(Exception):
-        service.registrar_nota("Matemáticas", "2026-1", 3.5)
+    with pytest.raises(NotaDuplicadaError):
+
+        service.registrar_nota(
+            "Matemáticas",
+            "2026-1",
+            3.5
+        )
 
 
 def test_permitir_misma_materia_en_semestre_diferente():
+
     service = RegistroNotasService()
 
-    service.registrar_nota("Matemáticas", "2026-1", 4.0)
+    service.registrar_nota(
+        "Matemáticas",
+        "2026-1",
+        4.0
+    )
 
     resultado = service.registrar_nota(
         "Matemáticas",
