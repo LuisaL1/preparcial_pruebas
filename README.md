@@ -138,6 +138,6 @@ Se configuró GitHub Actions para:
 
 # Reflexión
 
-Diseñar pruebas antes de programar ayudó a identificar escenarios importantes desde el inicio y facilitó la implementación.
+Diseñar primero los casos de prueba antes de programar permitió entender mejor los requerimientos y detectar situaciones importantes desde el inicio, como los valores límite y los posibles errores por notas duplicadas. Tener los casos definidos ayudó a desarrollar de manera más organizada y a validar cada funcionalidad con un objetivo claro, en lugar de programar sin una guía concreta.
 
-Lo más difícil del TDD fue evitar escribir lógica antes de crear los tests.
+Lo más difícil de seguir el ciclo TDD fue mantener la disciplina de escribir primero los tests antes del código de producción. En varios momentos surgió la tentación de implementar directamente la lógica, especialmente cuando los errores parecían simples de resolver. Sin embargo, seguir el proceso Red-Green-Refactor ayudó a construir un código más confiable, con mejor cobertura y más fácil de mantener.
