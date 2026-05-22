@@ -4,6 +4,9 @@ from app.exceptions.exceptions import NotaInvalidaError
 class RegistroNotasService:
     """Servicio para registrar notas académicas."""
 
+    def __init__(self):
+        self.notas_registradas = []
+
     def registrar_nota(self, materia: str, semestre: str, nota: float) -> dict:
 
         try:
@@ -14,11 +17,24 @@ class RegistroNotasService:
         if valor < 0.0 or valor > 5.0:
             raise NotaInvalidaError("La nota debe estar entre 0.0 y 5.0")
 
-        return {
+        for registro in self.notas_registradas:
+            if (
+                registro["materia"] == materia
+                and registro["semestre"] == semestre
+            ):
+                raise Exception(
+                    "Ya existe una nota registrada para esta materia y semestre"
+                )
+
+        nueva_nota = {
             "materia": materia,
             "semestre": semestre,
             "nota": valor,
         }
+
+        self.notas_registradas.append(nueva_nota)
+
+        return nueva_nota
 
     def aprobo_materia(self, nota: float) -> bool:
         return nota >= 3.0
