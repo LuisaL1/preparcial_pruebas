@@ -22,3 +22,10 @@ class RegistroNotasService:
 
     def aprobo_materia(self, nota: float) -> bool:
         return nota >= 3.0
+
+    def calcular_promedio(self, notas: list) -> float:
+
+        if len(notas) == 0:
+            return 0
+
+        return sum(notas) / len(notas)
